@@ -219,7 +219,15 @@ class ObjectField extends Component {
     if (this.state.wasPropertyKeyModified) {
       title = name;
     } else {
-      title = schema.title === undefined ? name : schema.title;
+      title = schema.title || name;
+    }
+
+    const titleField = schema.titleField;
+    if (titleField) {
+      var titleFromField = formData[titleField];
+      if (titleFromField) {
+        title = titleFromField;
+      }
     }
 
     const description = uiSchema["ui:description"] || schema.description;
